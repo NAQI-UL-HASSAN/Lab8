@@ -9,7 +9,9 @@ module lab8 (input logic [3:0] num,
     logic [3:0] q0, q1, q2, q3, q4, q5, q6, q7, q8;
     logic [4:0] wi_re;
     logic [8:0] w_ire;
-    logic [3:0] y, x;
+    logic [3:0] y, x, z, l;
+    logic clk1hz, clk100hz;
+    
 
 //DECODER FOR DFF SELECTION
     always_comb
@@ -48,66 +50,80 @@ module lab8 (input logic [3:0] num,
         endcase
     end
 
+//100 HZ CLOCK
+    clk100hz DUT1 (
+        .clk(clk),
+        .reset(reset),
+        .clk100hz(clk100hz)
+    );
+
+//1 HZ CLOCK
+    clk1hz DUT2 (
+        .clk(clk),
+        .reset(reset),
+        .clk1hz(clk1hz)
+    );
+
 //D_FFs
     d_ff ff0 (
         .q (q0),
-        .clk (clk),
+        .clk (clk100hz),
         .reset (reset),
         .enable (en0),
         .d (num)
     );
     d_ff ff1 (
         .q (q1),
-        .clk (clk),
+        .clk (clk100hz),
         .reset (reset),
         .enable (en1),
         .d (num)
     );
     d_ff ff2 (
         .q (q2),
-        .clk (clk),
+        .clk (clk100hz),
         .reset (reset),
         .enable (en2),
         .d (num)
     );
     d_ff ff3 (
         .q (q3),
-        .clk (clk),
+        .clk (clk100hz),
         .reset (reset),
         .enable (en3),
         .d (num)
     );
     d_ff ff4 (
         .q (q4),
-        .clk (clk),
+        .clk (clk100hz),
         .reset (reset),
         .enable (en4),
         .d (num)
     );
     d_ff ff5 (
         .q (q5),
-        .clk (clk),
+        .clk (clk100hz),
         .reset (reset),
         .enable (en5),
         .d (num)
     );
     d_ff ff6 (
         .q (q6),
-        .clk (clk),
+        .clk (clk100hz),
         .reset (reset),
         .enable (en6),
         .d (num)
     );
     d_ff ff7 (
         .q (q7),
-        .clk (clk),
+        .clk (clk100hz),
         .reset (reset),
         .enable (en7),
         .d (num)
     );
     d_ff ff8 (
         .q (q8),
-        .clk (clk),
+        .clk (clk100hz),
         .reset (reset),
         .enable (en8),
         .d (num)
@@ -128,10 +144,33 @@ module lab8 (input logic [3:0] num,
         .q5(q5),
         .q6(q6),
         .q7(q7),
-        .q8(q8),
-        .clk_out100hz(clk_out100hz),
-        .clk_out1hz(clk_out1hz)
+        .q8(q8)
     );
+
+//NUM MUX
+always_comb begin
+    case (sel)
+        4'b0000:z = q0;
+        4'b0001:z = q1;
+        4'b0010:z = q2;
+        4'b0011:z = q3;
+        4'b0100:z = q4;
+        4'b0101:z = q5;
+        4'b0110:z = q6;
+        4'b0111:z = q7;
+        4'b1000:z = q8;
+        default: z = 4'bxxxx;
+    endcase
+end
+
+//MUX FINAL
+
+    always_comb begin
+        case(write)
+            1'b0 : l = y;
+            1'b1 : l = z;
+        endcase
+    end
 
 //MUX1
     logic [2:0] d;

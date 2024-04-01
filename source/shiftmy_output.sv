@@ -1,22 +1,21 @@
 module shiftmy_output(input logic clk, reset, direction,
                       input logic [3:0] q0, q1, q2, q3, q4, q5, q6, q7, q8,
                       output logic [3:0] y, 
-                      output logic [2:0] x,
-                      output logic clk_out100hz, clk_out1hz
+                      output logic [2:0] x
                      );
-
+logic clk100hz, clk1hz;
 //100 HZ CLOCK
     clk100hz X (
         .clk(clk),
         .reset(reset),
-        .clk_out100hz(clk_out100hz)
+        .clk100hz(clk100hz)
     );
 
 //1 HZ CLOCK
     clk1hz Y (
         .clk(clk),
         .reset(reset),
-        .clk_out1hz(clk_out1hz)
+        .clk1hz(clk1hz)
     );
 
 //ADDERS
@@ -28,7 +27,7 @@ module shiftmy_output(input logic clk, reset, direction,
 
     //Counters
     always_comb ff0_d = 3'd0;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff0_q <= #1 3'd0;
@@ -39,7 +38,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
     
     always_comb ff1_d = ff1_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff1_q <= #1 3'd0;
@@ -53,7 +52,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff2_d = ff2_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff2_q <= #1 3'd0;
@@ -67,7 +66,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff3_d = ff3_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff3_q <= #1 3'd0;
@@ -81,7 +80,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff4_d = ff4_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff4_q <= #1 3'd0;
@@ -95,7 +94,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff5_d = ff5_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff5_q <= #1 3'd0;
@@ -109,7 +108,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff6_d = ff6_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff6_q <= #1 3'd0;
@@ -123,7 +122,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff7_d = ff7_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff7_q <= #1 3'd0;
@@ -133,7 +132,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff8_d = ff8_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff8_q <= #1 3'd0;
@@ -143,7 +142,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff9_d = ff9_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff9_q <= #1 3'd1;
@@ -157,7 +156,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff10_d = ff10_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff10_q <= #1 3'd2;
@@ -171,7 +170,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff11_d = ff11_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff11_q <= #1 3'd3;
@@ -185,7 +184,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff12_d = ff12_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff12_q <= #1 3'd4;
@@ -199,7 +198,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff13_d = ff13_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff13_q <= #1 3'd5;
@@ -213,7 +212,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff14_d = ff14_q + 1;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff14_q <= #1 3'd6;
@@ -227,7 +226,7 @@ module shiftmy_output(input logic clk, reset, direction,
     end
 
     always_comb ff15_d = 3'd7;
-    always_ff@(posedge clk_out100hz or posedge reset)
+    always_ff@(posedge clk100hz or posedge reset)
     begin
         if (reset) begin
             ff15_q <= #1 3'd7;
@@ -417,7 +416,7 @@ module shiftmy_output(input logic clk, reset, direction,
     logic [3:0] counter_d, counter_q;
 
     always_comb counter_d = counter_q + 1;
-    always_ff@(posedge clk_out1hz or posedge reset)
+    always_ff@(posedge clk1hz or posedge reset)
     begin
         if (reset) begin
             counter_q <= #1 4'd0;
@@ -432,7 +431,7 @@ module shiftmy_output(input logic clk, reset, direction,
     logic [3:0] sub_d, sub_q;
 
     always_comb sub_d = sub_q - 1;
-    always_ff@(posedge clk_out1hz or posedge reset)
+    always_ff@(posedge clk1hz or posedge reset)
     begin
         if (reset) begin
             sub_q <= #1 4'd15;

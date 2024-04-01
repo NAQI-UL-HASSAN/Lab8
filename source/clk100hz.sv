@@ -1,5 +1,5 @@
 module clk100hz (input logic clk, reset,
-                output logic clk_out100hz);
+                output logic clk100hz);
 
     logic q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15;
     
@@ -76,6 +76,6 @@ module clk100hz (input logic clk, reset,
     t_ff ff14(
         .reset(reset),
         .clk(q15),
-        .clk_out(clk_out100hz)
+        .clk_out(clk100hz)
     );
 endmodule

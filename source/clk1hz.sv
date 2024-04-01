@@ -1,5 +1,5 @@
 module clk1hz(input logic clk, reset,
-            output logic clk_out1hz);
+            output logic clk1hz);
 
     logic q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25;
     
@@ -136,6 +136,6 @@ module clk1hz(input logic clk, reset,
     t_ff ff27(
         .reset(reset),
         .clk(q25),
-        .clk_out(clk_out1hz)
+        .clk_out(clk1hz)
     );
 endmodule
